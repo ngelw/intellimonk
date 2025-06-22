@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Upload Book</title>
+</head>
+<body>
+    {% if success %}
+    <h1>{{success}}</h1>
+    {% endif %}
+    {% if error %}
+    <h1 style="color: red;">{{error}}</h1>
+    {% endif %}
+    <h1>Upload a New Book</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload Book</button>
+    </form>
+</body>
+</html>
