@@ -1,0 +1,45 @@
+{% extends 'components/base.html' %}
+{% block title %}My Books{% endblock %}
+{% block content %}
+    <h1>My Books</h1>
+    <div class="books-container">
+        {% for book in books %}
+            <div class="book-box">
+                <div><strong>"{{ book.title }}"</strong></div>
+                <div>{{ book.author }}</div>
+                {% if book.description %}
+                    <div class="desc-box">
+                        <p>{{ book.description }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No books found.</p>
+        {% endfor %}
+    </div>
+    <style>
+        .books-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .book-box {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            background: #f9f9f9;
+            width: 250px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .desc-box {
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            background: #fff;
+            padding: 8px;
+            margin-top: 8px;
+        }
+    </style>
+{% endblock %}
