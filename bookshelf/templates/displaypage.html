@@ -1,0 +1,173 @@
+{% extends 'components/base.html' %}
+{% block title %}My Books{% endblock %}
+{% block content %}
+<h1 class="bookshelf-title">My Books</h1>
+<div class="books-feed">
+    {% for book in books %}
+        <div class="book-post">
+            <div class="book-header">
+                <div class="book-avatar">
+                    {% if book.author_image %}
+                        <img src="{{ book.author_image.url }}" alt="{{ book.title }} cover" class="book-avatar-img">
+                    {% else %}
+                        <span class="book-avatar-placeholder">📚</span>
+                    {% endif %}
+                </div>
+                <div class="book-meta">
+                    <p class="book-user">{{ book.addedby.username }}</p>
+                    <span class="book-title">{{ book.title }}</span>
+                    <span class="book-author">by {{ book.author }}</span>
+                </div>
+            </div>
+            {% if book.image and book.image.url %}
+                <div class="book-img-wrap">
+                    <img src="{{ book.image.url }}" alt="{{ book.title }} cover" class="book-img">
+                </div>
+            {% endif %}
+            {% if book.description %}
+                <div class="book-desc">
+                    {{ book.description }}
+                </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p class="bookshelf-empty">No books found.</p>
+    {% endfor %}
+</div>
+<style>
+    @font-face {
+        font-family: 'Bookerly';
+        src: local('Bookerly'), url('/static/fonts/Bookerly-Regular.woff2') format('woff2');
+        font-display: swap;
+    }
+    body {
+        background: linear-gradient(120deg,rgb(255, 255, 255) 0%,rgb(255, 255, 255) 100%);
+        font-family: 'Bookerly', Georgia, serif;
+        color: #3e2c18;
+    }
+    .bookshelf-title {
+        text-align: center;
+        margin-bottom: 32px;
+        font-size: 2.5rem;
+        color: #3e2c18;
+        font-family: 'Bookerly', Georgia, serif;
+        letter-spacing: 0.01em;
+    }
+    .books-feed {
+        max-width: 480px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+    }
+    .book-post {
+        background:rgb(255, 255, 255);
+        border-radius: 18px;
+        box-shadow: 0 2px 16px rgba(160,140,107,0.10), 0 1px 4px rgba(160,140,107,0.06);
+        border: 1.5px solid #e3d7c3;
+        padding: 0 0 18px 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .book-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 18px 0 18px;
+    }
+    .book-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #e3d7c3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .book-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .book-avatar-placeholder {
+        font-size: 1.6rem;
+        color: #a08c6b;
+    }
+    .book-meta {
+        display: flex;
+        flex-direction: column;
+    }
+    .book-user {
+        font-size: 0.95rem;
+        color: #a08c6b;
+        margin-bottom: 2px;
+        font-family: inherit;
+    }
+    .book-title {
+        font-size: 1.18rem;
+        font-weight: 700;
+        color: #3e2c18;
+        font-family: 'Bookerly', Georgia, serif;
+    }
+    .book-author {
+        font-size: 0.98rem;
+        color: #a08c6b;
+        font-style: italic;
+        margin-top: 2px;
+    }
+    .book-img-wrap {
+        width: 220px;
+        max-width: 90%;
+        margin: 14px auto 0 auto;
+        background: #e3d7c3;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .book-img {
+        width: 100%;
+        height: auto;
+        max-height: 340px;
+        display: block;
+        object-fit: contain;
+        background: #e3d7c3;
+    }
+    .book-desc {
+        font-size: 1.08rem;
+        color: #4b3a22;
+        background: #f5efe6;
+        border-radius: 12px;
+        padding: 16px 18px;
+        border: 1px solid #e3d7c3;
+        margin: 14px 18px 0 18px;
+        font-family: 'Bookerly', Georgia, serif;
+        line-height: 1.6;
+    }
+    .bookshelf-empty {
+        text-align: center;
+        color: #a08c6b;
+        font-size: 1.1rem;
+        margin-top: 40px;
+    }
+    @media (max-width: 600px) {
+        .books-feed {
+            max-width: 98vw;
+        }
+        .book-post {
+            padding: 0 0 10px 0;
+        }
+        .book-header, .book-desc {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .book-img-wrap {
+            width: 98vw;
+            max-width: 98vw;
+        }
+    }
+</style>
+{% endblock %}

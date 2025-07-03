@@ -3,11 +3,24 @@
         <a class="nav-link" aria-current="page" href="/">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/books">Books</a>
+        <a class="nav-link" href="/feed">Community Shelf</a>
+    </li>
+{% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="/books">My Library</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/upload">Upload</a>
+        <a class="nav-link" href="/upload">Add Book</a>
     </li>
-
-  
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+    </li>
+    
+{% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/signup">Sign Up</a>
+{% endif %}
 </ul>

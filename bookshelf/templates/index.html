@@ -1,6 +1,36 @@
-{% extends 'components/base.html' %}
-{% block title %}IntelliMonk{% endblock %}
+{% extends "components/base.html" %}
+{% block title %}IntelliMonk Bookshelf{% endblock %}
 {% block content %}
-    <h1>This is IntelliMonk</h1>
-    <p>We are under dev.</p>
+<div class="container mt-5">
+    <div class="jumbotron bg-light p-5 rounded shadow">
+        <h1 class="display-4 text-primary mb-3">Welcome to IntelliMonk Bookshelf</h1>
+        <p class="lead text-secondary">
+            Track your reading journey, reflect on your learnings, and share your bookshelf with fellow book lovers.
+        </p>
+        <hr class="my-4">
+        <div class="row mt-4">
+            <div class="col-md-4 text-center">
+                <img src="https://images.pexels.com/photos/7034452/pexels-photo-7034452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Track Books" class="mb-2" style="height:150px;">
+                <h4>Track Your Books</h4>
+                <p>Log every book you've read, add notes, and keep your digital bookshelf organized.</p>
+                <a href="/books" class="btn btn-outline-primary btn-sm">My Bookshelf</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="https://e7.pngegg.com/pngimages/352/684/png-clipart-thinking-man-question-mark-bow-down.png" alt="Reflect & Learn" class="mb-2" style="height:150px;">
+                <h4>Reflect & Learn</h4>
+                <p>Write down what you learned from each book and revisit your insights anytime.</p>
+                <a href="/upload" class="btn btn-outline-success btn-sm">Add a Book</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="https://everydayfeminism.com/wp-content/uploads/2014/03/276041_m-f.jpg" alt="Share & Connect" class="mb-2" style="height:150px;">
+                <h4>Share & Connect</h4>
+                <p>Share your bookshelf and discoveries with friends, and explore others' reading journeys.</p>
+                <a href="/feed" class="btn btn-outline-warning btn-sm">Explore Community</a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-5">
+        <img src="https://cdn-cmmdc.nitrocdn.com/DqPmVofEypeAlmfOwfOWzdmzzokTYpTN/assets/images/optimized/rev-dce033a/www.palmettopublishing.com/wp-content/uploads/2024/04/Self-Help.png" alt="Bookshelf" class="img-fluid rounded shadow" style="max-width: 600px;">
+    </div>
+</div>
 {% endblock %}
