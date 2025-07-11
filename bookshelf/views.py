@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 # Create your views here.
 
 def login_view(request):
@@ -60,18 +62,31 @@ class UploadBook(LoginRequiredMixin, View):
 
 class MyBooks(LoginRequiredMixin, View):
     def get(self, request):
-        books = Book.objects.filter(addedby=request.user)
+        books = Book.objects.filter(addedby=request.user).order_by('-id')
         author_image = UserImage.objects.filter(user=request.user).first()
         return render(request, "mybooks.html", {"books": books, "author_image": author_image})
 
 class BookFeed(View):
     def get(self, request):
         books = list(Book.objects.filter(privacy='public').select_related('addedby'))
-        random.shuffle(books)
-        # Attach profile images for each book's author
-        author_images = {}
+        # random.shuffle(books)
         for book in books:
             user = book.addedby
             image_obj = UserImage.objects.filter(user=user).first()
             book.author_image = image_obj.image if image_obj and image_obj.image else None
-        return render(request, "displaypage.html", {"books": books})
+        per_page = int(request.GET.get('per_page', 3))
+        page = int(request.GET.get('page',1))
+        paginator = Paginator(books, per_page)
+        try:
+            show = paginator.page(page)
+        except PageNotAnInteger:
+            show = paginator.page(1)
+        except EmptyPage:
+            show = paginator.page(paginator.num_pages)
+        return render(request, "displaypage.html", {"books": show})
+    
+def show_profile(request):
+    user = request.user
+    image_obj = UserImage.objects.filter(user=user).first()
+    profile_image = image_obj.image if image_obj and image_obj.image else None
+    return render(request, "profile.html", {"user": user, "profile_image": profile_image})

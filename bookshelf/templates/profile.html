@@ -1,0 +1,15 @@
+{% extends 'components/base.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+    
+{% block content %}
+    {% if user %}
+    {% if profile_image and profile_image.url %}
+        <img src="{{ profile_image.url }}" style="width: 150px; height: 150px; border-radius: 50%;" alt="{{ user.username }}'s profile picture">
+    {% endif %}
+        <p>Name: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+    {% endif %}
+{% endblock content %}

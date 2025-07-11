@@ -30,10 +30,26 @@
                 </div>
             {% endif %}
         </div>
+   
+
     {% empty %}
         <p class="bookshelf-empty">No books found.</p>
     {% endfor %}
 </div>
+<nav style="margin-bottom: 20px;">
+    <input type="hidden" name="per_page" value="{{ request.GET.per_page|default:3 }}">
+    <form method="get">
+        <span>Page</span>
+        {% if books.has_previous %}
+            <button type="submit" name="page" value="{{ books.previous_page_number }}" class="btn btn-primary">Previous</button>
+        {% endif %}
+    </form>
+    <form method="get">
+        {% if books.has_next %}
+            <button type="submit" name="page" value="{{ books.next_page_number }}" class="btn btn-primary">Next</button>
+        {% endif %}
+    </form>
+</nav>
 <style>
     @font-face {
         font-family: 'Bookerly';

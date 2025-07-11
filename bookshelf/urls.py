@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',HomePage.as_view()),
+    path('user',show_profile, name='profile'),
     path('upload',UploadBook.as_view()),
     path('books',MyBooks.as_view()),
     path('feed',BookFeed.as_view()),
